@@ -1,22 +1,14 @@
 import React from "react";
 import procedure from "../assets/procedure.jpg";
-import { Input } from "antd";
+
 import { motion } from "framer-motion";
 
 function Home() {
-    const { Search } = Input;
-
-    const onSearch = (value) => console.log(value);
+    
 
     return (
         <div>
-            {/* SEARCH */}
-            <div className="w-auto h-18 px-4 py-2">
-                <Search
-                    placeholder="Tìm kiếm sản phẩm..."
-                    onSearch={onSearch}
-                />
-            </div>
+            
 
             {/* HERO VIDEO */}
             <motion.div

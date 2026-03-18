@@ -11,6 +11,7 @@ import "react-toastify/dist/ReactToastify.css";
 import CustomerLayout from "./layouts/CustomerLayout";
 /* ================= PAGES ================= */
 import Home from "./pages/Home";
+import Products from "./pages/Products";
 // import Login from "./pages/Login";
 // import Register from "./pages/Register";
 
@@ -22,6 +23,7 @@ function App() {
       <Routes>
         <Route path="/" element={<CustomerLayout />}>
           <Route index element={<Home />} />
+          <Route path="products" element={<Products />} />
           {/* <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} /> */}
           {/* Redirect any unknown routes to home */}
