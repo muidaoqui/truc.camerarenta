@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaRegEye } from "react-icons/fa";
-import logo from "../assets/logo.png";
+import logo from "../assets/logo.jpg";
 import axios from "axios";
 import { toast } from "react-toastify";
 // import Register from "./Register";
@@ -85,10 +85,10 @@ function Login() {
         <div className=" w-full flex justify-center items-center bg-gray-50 px-4">
             <div className="flex flex-col md:flex-row w-full max-w-2xl overflow-hidden rounded-xl shadow-lg bg-white">
                 {/* Left banner */}
-                <div className="bg-gradient-to-br from-purple-200 to-cyan-200 flex flex-col justify-center items-center p-6 md:p-10 text-cyan-700 md:rounded-l-xl">
+                <div className=" flex flex-col justify-center items-center p-6 md:p-10 text-cyan-700 md:rounded-l-xl">
                     <img src={logo} alt="Logo" className="w-auto h-40 rounded-xl mb-4" />
                     <p className="text-center mt-10">
-                        Giải pháp tìm việc nhanh chóng và hiệu quả cho bạn!
+                        Máy ảnh chuyên nghiệp cho cuộc sống hiện đại
                     </p>
                 </div>
 
@@ -159,7 +159,7 @@ function Login() {
                   ${openRegister ? "translate-x-0" : "translate-x-full"}`}
                             >
                                 Đăng nhập
-                                <Login onClose={() => setOpenLogin(false)} />
+                                
                             </div>
                         </p>
                     </form>
