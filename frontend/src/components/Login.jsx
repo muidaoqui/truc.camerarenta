@@ -1,0 +1,172 @@
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { FaRegEye } from "react-icons/fa";
+import logo from "../assets/logo.png";
+import axios from "axios";
+import { toast } from "react-toastify";
+// import Register from "./Register";
+
+function Login() {
+    const [openRegister, setOpenRegister] = useState(false);
+    const API = import.meta.env.VITE_API_URL;
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [error, setError] = useState("");
+    const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
+
+    const togglePassword = () => {
+        const input = document.getElementById("password");
+        input.type = input.type === "password" ? "text" : "password";
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setError("");
+        setLoading(true);
+
+        try {
+            const res = await axios.post(`${API}/api/auth/login`, {
+                email,
+                password,
+            });
+
+            const { token, user, message } = res.data;
+
+            // Nếu user undefined, hiện thông báo và return
+            if (!user || !token) {
+                toast.error(message || "Đăng nhập thất bại");
+                setError(message || "Đăng nhập thất bại");
+                setLoading(false);
+                return;
+            }
+
+            if (user.status === "banned") {
+                toast.error("Tài khoản của bạn đã bị khóa. Vui lòng liên hệ quản trị viên.");
+                setError("Tài khoản của bạn đã bị khóa. Vui lòng liên hệ quản trị viên.");
+                setLoading(false);
+                return;
+            }
+
+            if (user.status === "banned") {
+                toast.error("Tài khoản của bạn đã bị khóa. Vui lòng liên hệ hỗ trợ.");
+                setError("Tài khoản của bạn đã bị khóa. Vui lòng liên hệ hỗ trợ.");
+                setLoading(false);
+                return;
+            }
+
+
+            // Lưu token và user
+            localStorage.setItem("token", token);
+            localStorage.setItem("user", JSON.stringify(user));
+            toast.success("Đăng nhập thành công!");
+
+            // Điều hướng dựa vào role
+            switch (user.role) {
+                case "admin":
+                    navigate("/admin/dashboard");
+                    break;
+                case "recruiter":
+                    navigate("/recruiter/dashboard");
+                    break;
+                default:
+                    navigate("/"); // Trang chủ cho candidate
+            }
+        } catch (err) {
+            console.error("Login error:", err);
+            toast.error(err.response?.data?.message || "Đăng nhập thất bại");
+            setError(err.response?.data?.message || "Đăng nhập thất bại");
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    return (
+        <div className=" w-full flex justify-center items-center bg-gray-50 px-4">
+            <div className="flex flex-col md:flex-row w-full max-w-2xl overflow-hidden rounded-xl shadow-lg bg-white">
+                {/* Left banner */}
+                <div className="bg-gradient-to-br from-purple-200 to-cyan-200 flex flex-col justify-center items-center p-6 md:p-10 text-cyan-700 md:rounded-l-xl">
+                    <img src={logo} alt="Logo" className="w-auto h-40 rounded-xl mb-4" />
+                    <p className="text-center mt-10">
+                        Giải pháp tìm việc nhanh chóng và hiệu quả cho bạn!
+                    </p>
+                </div>
+
+                {/* Form */}
+                <div className="flex flex-col justify-center w-full p-6 md:p-10">
+                    <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
+                        <h1 className="text-3xl font-bold text-center text-cyan-400">
+                            Đăng Nhập
+                        </h1>
+
+                        <div>
+                            <label className="block mb-1">Email</label>
+                            <input
+                                type="email"
+                                className="w-full h-10 px-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-400"
+                                placeholder="Nhập email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                required
+                            />
+                        </div>
+
+                        <div>
+                            <label className="block mb-1">Mật khẩu</label>
+                            <div className="relative">
+                                <input
+                                    type="password"
+                                    id="password"
+                                    className="w-full h-10 px-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-400"
+                                    placeholder="Nhập mật khẩu"
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    required
+                                />
+                                <span
+                                    className="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer"
+                                    onClick={togglePassword}
+                                >
+                                    <FaRegEye />
+                                </span>
+                            </div>
+                        </div>
+
+                        <button
+                            type="submit"
+                            className="bg-cyan-400 hover:bg-cyan-500 text-white h-10 rounded-lg font-semibold disabled:opacity-50"
+                            disabled={loading}
+                        >
+                            {loading ? "Đang đăng nhập..." : "Đăng Nhập"}
+                        </button>
+
+                        {error && (
+                            <p className="text-sm text-red-600 text-center">{error}</p>
+                        )}
+
+                        <p className="text-center text-sm">
+                            <Link to="/forgot-password" className="text-cyan-600 hover:underline mr-2">
+                                Quên mật khẩu?
+                            </Link>
+                        </p>
+                        <p className="text-center text-sm">
+                            Chưa có tài khoản?{" "}
+                            <Link to="/register" className="text-cyan-600 hover:underline">
+                                Đăng ký
+                            </Link>
+                            <div
+                                className={`fixed top-16 right-0 z-40 transform transition-transform duration-300
+                  ${openRegister ? "translate-x-0" : "translate-x-full"}`}
+                            >
+                                Đăng nhập
+                                <Login onClose={() => setOpenLogin(false)} />
+                            </div>
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    );
+}
+
+export default Login;

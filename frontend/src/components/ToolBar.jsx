@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import logo from "../assets/logo.jpg";
 import NavBar from "./NavBar";
+import Login from "./Login";
 import {
     MenuOutlined,
     CloseOutlined,
@@ -14,7 +15,7 @@ function ToolBar() {
     const [showMenu, setShowMenu] = useState(false);
 
     const onSearch = (value) => console.log(value);
-
+    const [openLogin, setOpenLogin] = useState(false);
     return (
         <>
             {/* HEADER */}
@@ -33,8 +34,13 @@ function ToolBar() {
                 <img src={logo} alt="Logo" className="w-16 h-16" />
 
                 <div className="flex">
-                    <button className="w-10 h-16">
-                        <UserOutlined />
+                    <button
+                        className="w-10 h-16"
+                        onClick={() => setOpenLogin(!openLogin)}
+                    >
+                        <span className={`${openLogin ? "rotate-180" : ""} inline-block transition-transform duration-300`}>
+                            {openLogin ? <CloseOutlined /> : <UserOutlined />}
+                        </span>
                     </button>
                     <button className="w-10 h-16">
                         <ShoppingCartOutlined />
@@ -42,13 +48,6 @@ function ToolBar() {
                 </div>
             </div>
 
-            {/* OVERLAY */}
-            {showMenu && (
-                <div
-                    className="fixed inset-0 bg-black bg-opacity-40 z-30"
-                    onClick={() => setShowMenu(false)}
-                />
-            )}
 
             {/* SIDEBAR */}
             <div
@@ -56,6 +55,12 @@ function ToolBar() {
                 ${showMenu ? "translate-x-0" : "-translate-x-full"}`}
             >
                 <NavBar onClose={() => setShowMenu(false)} />
+            </div>
+            <div
+                className={`fixed top-16 right-0 z-40 transform transition-transform duration-300
+    ${openLogin ? "translate-x-0" : "translate-x-full"}`}
+            >
+                <Login onClose={() => setOpenLogin(false)} />
             </div>
 
             {/* SEARCH */}
