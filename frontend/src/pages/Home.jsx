@@ -2,7 +2,7 @@ import React from "react";
 import procedure from "../assets/procedure.jpg";
 
 import { motion } from "framer-motion";
-
+import MenuSection from "../components/MenuSection";
 function Home() {
     
 
@@ -44,32 +44,12 @@ function Home() {
             </motion.div>
 
             {/* FEATURED PRODUCTS */}
-            <div className="max-w-7xl mx-auto px-4">
-                <h1 className="text-2xl text-center mt-8 font-bold">
-                    Sản phẩm nổi bật
-                </h1>
-
-                <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mt-6">
-                    {[1, 2, 3, 4].map((item) => (
-                        <div key={item} className="border p-4 rounded hover:shadow-lg transition">
-                            <img
-                                src="https://cdn.tgdd.vn/Products/Images/42/248322/Camera-DJI-Osmo-Pocket-2-Black-400x400.jpg"
-                                alt="DJI Osmo Pocket 2"
-                                className="w-full h-48 object-cover"
-                            />
-                            <h2 className="text-lg font-semibold mt-2">
-                                DJI Osmo Pocket 2
-                            </h2>
-                            <p className="text-gray-500 mt-1">
-                                Giá: 9.990.000 VND
-                            </p>
-                        </div>
-                    ))}
-                </div>
+            <div className=" mx-auto px-4">
+                <MenuSection />
             </div>
 
             {/* PROCEDURE IMAGE */}
-            <div className="px-auto bg-gray-100 py-10 mt-10">
+            <div className="px-auto bg-gray-100 py-10">
                 <div className=" max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 ">
                     <div className="mt-10">
                         <img
@@ -164,6 +144,7 @@ function Home() {
                     </ol>
                 </div>
             </div>
+            
         </div>
     );
 }

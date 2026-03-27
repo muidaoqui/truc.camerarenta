@@ -11,76 +11,29 @@ function Footer() {
         <div>
           <h2 className="text-lg font-semibold mb-3">truc.camerarental</h2>
           <p className="text-gray-600 text-sm">
-            Cho Thuê Máy Ảnh, Máy Quay Phim, Thiết Bị Live,...
+            THUÊ MÁY ẢNH KHU VỰC TPHCM
           </p>
-
-          <img
-            src="https://cdn.haitrieu.com/wp-content/uploads/2022/01/Da-thong-bao-bo-cong-thuong.png"
-            alt="Đã thông báo bộ công thương"
-            className="w-32 mt-4"
-          />
-
-          <div className="flex gap-3 mt-4">
-            <button className="border p-2 rounded hover:bg-white">
-              <FacebookOutlined />
-            </button>
-            <button className="border p-2 rounded hover:bg-white">
-              <YoutubeOutlined />
-            </button>
-          </div>
         </div>
 
         {/* COLUMN 2 */}
         <div>
           <h2 className="text-lg font-semibold mb-3">Thông tin liên hệ</h2>
-
           <div className="flex items-start gap-2 text-gray-600 text-sm">
             <EnvironmentFilled className="mt-1" />
             <p>
-              truc.camerarental, 265 Đường số 8 phường 11 Gò Vâps, Ho Chi Minh City, Vietnam
+              truc.camerarental, 20 Trần Khắc Chân, Phường 15, Phú Nhuận, Ho Chi Minh City, Vietnam
             </p>
           </div>
-
+          <div className="flex items-start gap-2 text-gray-600 text-sm">
+            <EnvironmentFilled className="mt-1" />
+            <p>
+              truc.camerarental, 265 Đường số 8 phường 11 Gò Vấp, Ho Chi Minh City, Vietnam
+            </p>
+          </div>
           <div className="flex items-center gap-2 mt-3 text-gray-600 text-sm">
             <PhoneFilled />
             <p>0795 398 839</p>
           </div>
-        </div>
-
-        {/* COLUMN 3 */}
-        <div>
-          <h2 className="text-lg font-semibold mb-3">Liên kết</h2>
-
-          <ul className="text-gray-600 text-sm space-y-2">
-            <li className="hover:text-black cursor-pointer">Điều Kiện Thuê</li>
-            <li className="hover:text-black cursor-pointer">
-              Quy Trình Thuê và Thanh Toán
-            </li>
-            <li className="hover:text-black cursor-pointer">
-              Chính Sách Vận Chuyển
-            </li>
-            <li className="hover:text-black cursor-pointer">
-              Chính Sách Bảo Mật
-            </li>
-            <li className="hover:text-black cursor-pointer">
-              Chính Sách Cọc & Thế Chấp
-            </li>
-          </ul>
-        </div>
-
-        {/* COLUMN 4 */}
-        <div>
-          <h2 className="text-lg font-semibold mb-3">DỊCH VỤ</h2>
-
-          <ul className="text-gray-600 text-sm space-y-2">
-            <li className="hover:text-black cursor-pointer">Trang chủ</li>
-            <li className="hover:text-black cursor-pointer">Sản Phẩm Cho Thuê</li>
-            <li className="hover:text-black cursor-pointer">Thuê Theo Nhu Cầu</li>
-            <li className="hover:text-black cursor-pointer">Thuê Theo Tháng</li>
-            <li className="hover:text-black cursor-pointer">Sản Xuất Video</li>
-            <li className="hover:text-black cursor-pointer">Chia Sẻ Kinh Nghiệm</li>
-            <li className="hover:text-black cursor-pointer">Liên Hệ</li>
-          </ul>
         </div>
       </div>
 
@@ -92,21 +45,27 @@ function Footer() {
       {/* FLOAT CONTACT */}
       <div className="fixed right-4 bottom-24 flex flex-col gap-3">
         <a
-          href="tel:0766120590"
+          href="tel:0795398839"
           className="bg-red-500 text-white w-12 h-12 flex items-center justify-center rounded-full shadow-lg"
         >
           <PhoneFilled />
         </a>
 
         <a
-          href="https://zalo.me"
+          href="https://www.facebook.com/groups/306263058408830/user/100050156825442/"
           className="bg-blue-500 text-white w-12 h-12 flex items-center justify-center rounded-full shadow-lg"
         >
           Z
         </a>
 
         <a
-          href="https://maps.google.com"
+          href="https://www.google.com/maps/place/TRUC.CAMERARENTAL+-+CHO+THU%C3%8A+M%C3%81Y+%E1%BA%A2NH/@10.7975649,106.6775126,17z/data=!4m15!1m8!3m7!1s0x317528d6ee4b9417:0x5f98cdaeed611573!2zMjAgVHLhuqduIEto4bqvYyBDaMOibiwgUGjGsOG7nW5nIDE1LCBD4bqndSBLaeG7h3UsIEjhu5MgQ2jDrSBNaW5oLCBWaWV0bmFt!3b1!8m2!3d10.7975596!4d106.6800875!16s%2Fg%2F11wbknscwf!3m5!1s0x317529d3386f79a9:0x428eb2715a6b9b5b!8m2!3d10.7975596!4d106.6800875!16s%2Fg%2F11z1vw0ts2?entry=ttu&g_ep=EgoyMDI2MDMyMy4xIKXMDSoASAFQAw%3D%3D"
+          className="bg-yellow-500 text-white w-12 h-12 flex items-center justify-center rounded-full shadow-lg"
+        >
+          <EnvironmentFilled />
+        </a>
+        <a
+          href="https://www.google.com/maps?q=TRUC.CAMERARENTAL+-+CHO+THUÊ+MÁY+ẢNH,+265+Đ.+Số+8,+Phường+11,+Gò+Vấp,+Thành+phố+Hồ+Chí+Minh+700000&ftid=0x3175290059501195:0x46b2a87b85755583&entry=gps&lucs=,94297699,94275415,94284469,94231188,94280568,47071704,94218641,94282134,94286869&g_ep=CAISEjI1LjQ5LjkuODM4ODk5MTgzMBgAIIgnKlEsOTQyOTc2OTksOTQyNzU0MTUsOTQyODQ0NjksOTQyMzExODgsOTQyODA1NjgsNDcwNzE3MDQsOTQyMTg2NDEsOTQyODIxMzQsOTQyODY4NjlCAlZO&skid=ad4147a1-605b-4b44-9e05-40f9cebd252f&g_st=ic"
           className="bg-yellow-500 text-white w-12 h-12 flex items-center justify-center rounded-full shadow-lg"
         >
           <EnvironmentFilled />

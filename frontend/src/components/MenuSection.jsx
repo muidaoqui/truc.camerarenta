@@ -1,37 +1,8 @@
-import React, { useState } from 'react';
-import { Col, InputNumber, Row, Slider, Space } from 'antd';
-import { useNavigate } from 'react-router-dom';
+import React from "react";
+import { useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
-const IntegerStep = () => {
-    const [inputValue, setInputValue] = useState(1);
-    const onChange = newValue => {
-        setInputValue(newValue);
-    };
-    return (
-        <Row>
-            <Col span={12}>
-                <Slider
-                    min={1}
-                    max={20}
-                    onChange={onChange}
-                    value={typeof inputValue === 'number' ? inputValue : 0}
-                />
-            </Col>
-            <Col span={4}>
-                <InputNumber
-                    min={1}
-                    max={20}
-                    style={{ margin: '0 16px' }}
-                    value={inputValue}
-                    onChange={onChange}
-                    formatter={(value) => `${value} M`}
-                    parser={(value) => value.replace(" M", "")}
-                />
-            </Col>
-        </Row>
-    );
-};
-
+// fake data (bạn thay bằng data thật)
 const menuItems = [
     {
         name: "Canon R50",
@@ -117,21 +88,20 @@ const menuItems = [
 
 const loopData = [...menuItems, ...menuItems];
 
+
 function Card({ item }) {
-    const navigate = useNavigate();
-    const handleClick = () => {
-        // Encode tên sản phẩm để truyền qua URL
-        navigate(`/product/${encodeURIComponent(item.name)}`);
-    };
+    
     return (
-        <div className="relative rounded-xl overflow-hidden cursor-pointer" onClick={handleClick}>
+        <div className="min-w-[250px] h-[160px] relative rounded-xl overflow-hidden">
             <img
                 src={item.img}
                 alt=""
                 className="w-full h-full object-cover"
             />
+
             {/* overlay */}
             <div className="absolute inset-0 bg-black/40" />
+
             {/* text */}
             <div className="absolute bottom-3 left-3 text-white">
                 <h3 className="font-bold">{item.name}</h3>
@@ -141,38 +111,59 @@ function Card({ item }) {
     );
 }
 
-function Products() {
-
-
+function MenuSection() {
+    const navigate = useNavigate();
+    const { cameraId } = useParams();
+    const [selectedCamera, setSelectedCamera] = useState(null);
     return (
-        <div className="max-w-7xl mx-auto px-4">
-            <h1 className="text-2xl text-center font-bold mb-6">
-                Tất cả sản phẩm
-            </h1>
-            <div className="">
-                {/*filter*/}
-                <div>
-                    <h2>Lọc sản phẩm</h2>
-                    <div className="flex gap-4 mt-4">
-                        <Space style={{ width: '100%' }} vertical>
-                            <IntegerStep />
-                        </Space>
-                        <select className="border border-gray-300 rounded px-4 py-2">
-                            <option value="">Loại thiết bị</option>
-                            <option value="camera">Camera</option>
-                            <option value="lens">Lens</option>
-                            <option value="accessory">Phụ kiện</option>
-                        </select>
-                    </div>
-                </div>
-                <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mt-6">
-                    {menuItems.map((item, index) => (
+        <div className="bg-gradient-to-b from-[#FCF4F3] to-[#F8EAEA] py-16 overflow-hidden">
+            {/* Title */}
+            <div className="text-center text-[#4b1c1c] mb-10">
+                <h2 className="text-3xl font-bold">MÁY ẢNH NỔI BẬT</h2>
+                <p className="text-sm opacity-80 mt-2">
+                    Chạm vào máy ảnh để xem chi tiết và đặt ngay
+                </p>
+            </div>
+
+            {/* ROW 1 - chạy trái */}
+            {/* ROW 1 */}
+            <div className="relative mt-6">
+                {/* ROW */}
+                <div className="flex gap-6 w-max animate-scroll-left">
+                    {loopData.map((item, index) => (
                         <Card key={index} item={item} />
                     ))}
                 </div>
+
+                {/* Fade LEFT */}
+                <div className="pointer-events-none absolute top-0 left-0 h-full w-32 bg-gradient-to-r from-[#FCF4F3] to-transparent" />
+
+                {/* Fade RIGHT */}
+                <div className="pointer-events-none absolute top-0 right-0 h-full w-32 bg-gradient-to-l from-[#FCF4F3] to-transparent" />
+            </div>
+
+            {/* ROW 2 */}
+            <div className="relative mt-6">
+                <div className="flex gap-6 w-max animate-scroll-right">
+                    {loopData.map((item, index) => (
+                        <Card key={index} item={item} />
+                    ))}
+                </div>
+
+                <div className="pointer-events-none absolute top-0 left-0 h-full w-32 bg-gradient-to-r from-[#FCF4F3] to-transparent" />
+                <div className="pointer-events-none absolute top-0 right-0 h-full w-32 bg-gradient-to-l from-[#FCF4F3] to-transparent" />
+            </div>
+
+            {/* Button */}
+            <div className="text-center mt-10">
+                <button className="px-6 py-3 border border-orange-400 text-[#4b1c1c] rounded-full hover:bg-orange-500 transition"
+                    onClick={() => navigate("/products")}
+                >
+                    XEM TẤT CẢ MÁY ẢNH →
+                </button>
             </div>
         </div>
     );
 }
 
-export default Products;
+export default MenuSection;

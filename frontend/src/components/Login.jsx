@@ -4,21 +4,17 @@ import { FaRegEye } from "react-icons/fa";
 import logo from "../assets/logo.jpg";
 import axios from "axios";
 import { toast } from "react-toastify";
-// import Register from "./Register";
 
 function Login() {
-    const [openRegister, setOpenRegister] = useState(false);
     const API = import.meta.env.VITE_API_URL;
+
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
-    const navigate = useNavigate();
+    const [showPassword, setShowPassword] = useState(false);
 
-    const togglePassword = () => {
-        const input = document.getElementById("password");
-        input.type = input.type === "password" ? "text" : "password";
-    };
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -33,7 +29,6 @@ function Login() {
 
             const { token, user, message } = res.data;
 
-            // Nếu user undefined, hiện thông báo và return
             if (!user || !token) {
                 toast.error(message || "Đăng nhập thất bại");
                 setError(message || "Đăng nhập thất bại");
@@ -41,27 +36,21 @@ function Login() {
                 return;
             }
 
+            // check banned
             if (user.status === "banned") {
-                toast.error("Tài khoản của bạn đã bị khóa. Vui lòng liên hệ quản trị viên.");
-                setError("Tài khoản của bạn đã bị khóa. Vui lòng liên hệ quản trị viên.");
+                toast.error("Tài khoản của bạn đã bị khóa.");
+                setError("Tài khoản của bạn đã bị khóa.");
                 setLoading(false);
                 return;
             }
 
-            if (user.status === "banned") {
-                toast.error("Tài khoản của bạn đã bị khóa. Vui lòng liên hệ hỗ trợ.");
-                setError("Tài khoản của bạn đã bị khóa. Vui lòng liên hệ hỗ trợ.");
-                setLoading(false);
-                return;
-            }
-
-
-            // Lưu token và user
+            // lưu dữ liệu
             localStorage.setItem("token", token);
             localStorage.setItem("user", JSON.stringify(user));
+
             toast.success("Đăng nhập thành công!");
 
-            // Điều hướng dựa vào role
+            // điều hướng
             switch (user.role) {
                 case "admin":
                     navigate("/admin/dashboard");
@@ -70,35 +59,40 @@ function Login() {
                     navigate("/recruiter/dashboard");
                     break;
                 default:
-                    navigate("/"); // Trang chủ cho candidate
+                    navigate("/");
             }
+
         } catch (err) {
             console.error("Login error:", err);
-            toast.error(err.response?.data?.message || "Đăng nhập thất bại");
-            setError(err.response?.data?.message || "Đăng nhập thất bại");
+            const msg = err.response?.data?.message || "Đăng nhập thất bại";
+            toast.error(msg);
+            setError(msg);
         } finally {
             setLoading(false);
         }
     };
 
     return (
-        <div className=" w-full flex justify-center items-center bg-gray-50 px-4">
+        <div className="w-full flex justify-center items-center bg-gray-50 px-4 min-h-screen">
             <div className="flex flex-col md:flex-row w-full max-w-2xl overflow-hidden rounded-xl shadow-lg bg-white">
-                {/* Left banner */}
-                <div className=" flex flex-col justify-center items-center p-6 md:p-10 text-cyan-700 md:rounded-l-xl">
+
+                {/* LEFT */}
+                <div className="flex flex-col justify-center items-center p-6 md:p-10 text-cyan-700">
                     <img src={logo} alt="Logo" className="w-auto h-40 rounded-xl mb-4" />
-                    <p className="text-center mt-10">
+                    <p className="text-center mt-4">
                         Máy ảnh chuyên nghiệp cho cuộc sống hiện đại
                     </p>
                 </div>
 
-                {/* Form */}
+                {/* RIGHT FORM */}
                 <div className="flex flex-col justify-center w-full p-6 md:p-10">
                     <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
+                        
                         <h1 className="text-3xl font-bold text-center text-cyan-400">
                             Đăng Nhập
                         </h1>
 
+                        {/* EMAIL */}
                         <div>
                             <label className="block mb-1">Email</label>
                             <input
@@ -111,12 +105,12 @@ function Login() {
                             />
                         </div>
 
+                        {/* PASSWORD */}
                         <div>
                             <label className="block mb-1">Mật khẩu</label>
                             <div className="relative">
                                 <input
-                                    type="password"
-                                    id="password"
+                                    type={showPassword ? "text" : "password"}
                                     className="w-full h-10 px-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-400"
                                     placeholder="Nhập mật khẩu"
                                     value={password}
@@ -124,14 +118,15 @@ function Login() {
                                     required
                                 />
                                 <span
-                                    className="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer"
-                                    onClick={togglePassword}
+                                    className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer"
+                                    onClick={() => setShowPassword(!showPassword)}
                                 >
                                     <FaRegEye />
                                 </span>
                             </div>
                         </div>
 
+                        {/* BUTTON */}
                         <button
                             type="submit"
                             className="bg-cyan-400 hover:bg-cyan-500 text-white h-10 rounded-lg font-semibold disabled:opacity-50"
@@ -140,28 +135,25 @@ function Login() {
                             {loading ? "Đang đăng nhập..." : "Đăng Nhập"}
                         </button>
 
+                        {/* ERROR */}
                         {error && (
                             <p className="text-sm text-red-600 text-center">{error}</p>
                         )}
 
+                        {/* LINKS */}
                         <p className="text-center text-sm">
-                            <Link to="/forgot-password" className="text-cyan-600 hover:underline mr-2">
+                            <Link to="/forgot-password" className="text-cyan-600 hover:underline">
                                 Quên mật khẩu?
                             </Link>
                         </p>
+
                         <p className="text-center text-sm">
                             Chưa có tài khoản?{" "}
                             <Link to="/register" className="text-cyan-600 hover:underline">
                                 Đăng ký
                             </Link>
-                            <div
-                                className={`fixed top-16 right-0 z-40 transform transition-transform duration-300
-                  ${openRegister ? "translate-x-0" : "translate-x-full"}`}
-                            >
-                                Đăng nhập
-                                
-                            </div>
                         </p>
+
                     </form>
                 </div>
             </div>
