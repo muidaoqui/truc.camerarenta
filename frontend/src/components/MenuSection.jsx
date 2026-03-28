@@ -90,9 +90,13 @@ const loopData = [...menuItems, ...menuItems];
 
 
 function Card({ item }) {
-    
+
     return (
-        <div className="min-w-[250px] h-[160px] relative rounded-xl overflow-hidden">
+        <div className="
+  w-[80vw] sm:w-[60vw] md:w-[300px] lg:w-[350px]
+  aspect-[4/3]
+  relative rounded-xl overflow-hidden
+">
             <img
                 src={item.img}
                 alt=""
