@@ -145,7 +145,7 @@ function Products() {
 
 
     return (
-        <div className="max-w-7xl mx-auto px-4">
+        <div className="max-w-7xl mx-auto px-4 py-10">
             <h1 className="text-2xl text-center font-bold mb-6">
                 Tất cả sản phẩm
             </h1>

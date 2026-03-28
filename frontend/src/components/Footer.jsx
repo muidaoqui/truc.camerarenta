@@ -4,7 +4,7 @@ import { EnvironmentFilled } from "@ant-design/icons";
 
 function Footer() {
   return (
-    <footer className="bg-gray-200 mt-10">
+    <footer className="bg-gray-200 ">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 px-6 py-10">
 
         {/* COLUMN 1 */}
@@ -44,19 +44,6 @@ function Footer() {
 
       {/* FLOAT CONTACT */}
       <div className="fixed right-4 bottom-24 flex flex-col gap-3">
-        <a
-          href="tel:0795398839"
-          className="bg-red-500 text-white w-12 h-12 flex items-center justify-center rounded-full shadow-lg"
-        >
-          <PhoneFilled />
-        </a>
-
-        <a
-          href="https://www.facebook.com/groups/306263058408830/user/100050156825442/"
-          className="bg-blue-500 text-white w-12 h-12 flex items-center justify-center rounded-full shadow-lg"
-        >
-          Z
-        </a>
 
         <a
           href="https://www.google.com/maps/place/TRUC.CAMERARENTAL+-+CHO+THU%C3%8A+M%C3%81Y+%E1%BA%A2NH/@10.7975649,106.6775126,17z/data=!4m15!1m8!3m7!1s0x317528d6ee4b9417:0x5f98cdaeed611573!2zMjAgVHLhuqduIEto4bqvYyBDaMOibiwgUGjGsOG7nW5nIDE1LCBD4bqndSBLaeG7h3UsIEjhu5MgQ2jDrSBNaW5oLCBWaWV0bmFt!3b1!8m2!3d10.7975596!4d106.6800875!16s%2Fg%2F11wbknscwf!3m5!1s0x317529d3386f79a9:0x428eb2715a6b9b5b!8m2!3d10.7975596!4d106.6800875!16s%2Fg%2F11z1vw0ts2?entry=ttu&g_ep=EgoyMDI2MDMyMy4xIKXMDSoASAFQAw%3D%3D"

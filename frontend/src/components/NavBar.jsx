@@ -7,11 +7,7 @@ function NavBar({ onClose }) {
     const menuItems = [
         "TRANG CHỦ",
         "SẢN PHẨM CHO THUÊ",
-        "THUÊ THEO COMBO",
-        "THUÊ THEO THÁNG",
-        "SẢN XUẤT VIDEO",
-        "LIÊN HỆ",
-        "GIỚI THIỆU",
+        "BLOG",
     ];
 
     const handleMenuItemClick = (item) => {

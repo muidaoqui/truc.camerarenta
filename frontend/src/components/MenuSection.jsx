@@ -116,10 +116,10 @@ function MenuSection() {
     const { cameraId } = useParams();
     const [selectedCamera, setSelectedCamera] = useState(null);
     return (
-        <div className="bg-gradient-to-b from-[#FCF4F3] to-[#F8EAEA] py-16 overflow-hidden">
+        <div className="bg-gradient-to-b from-[#FCF4F3] to-[#F8EAEA]  overflow-hidden h-screen flex flex-col justify-center">
             {/* Title */}
             <div className="text-center text-[#4b1c1c] mb-10">
-                <h2 className="text-3xl font-bold">MÁY ẢNH NỔI BẬT</h2>
+                <h2 className="text-4xl font-bold">MÁY ẢNH NỔI BẬT</h2>
                 <p className="text-sm opacity-80 mt-2">
                     Chạm vào máy ảnh để xem chi tiết và đặt ngay
                 </p>
@@ -155,7 +155,7 @@ function MenuSection() {
             </div>
 
             {/* Button */}
-            <div className="text-center mt-10">
+            <div className="text-center mt-20">
                 <button className="px-6 py-3 border border-orange-400 text-[#4b1c1c] rounded-full hover:bg-orange-500 transition"
                     onClick={() => navigate("/products")}
                 >

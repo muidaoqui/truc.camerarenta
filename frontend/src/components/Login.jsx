@@ -73,7 +73,7 @@ function Login() {
     };
 
     return (
-        <div className="w-full flex justify-center items-center bg-gray-50 px-4 min-h-screen">
+        <div className="w-full flex justify-center items-center bg-gradient-to-b from-[#FCF4F3] to-[#F8EAEA] px-4 min-h-screen">
             <div className="flex flex-col md:flex-row w-full max-w-2xl overflow-hidden rounded-xl shadow-lg bg-white">
 
                 {/* LEFT */}
